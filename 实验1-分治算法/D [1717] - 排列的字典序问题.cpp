@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-long long a[22],n,ans,x[22],num;
+int a[22],n,ans,x[22],num;
 int main() {
     x[0]=1;
     for(int i=1; i<=20; i++)
@@ -17,7 +17,7 @@ int main() {
     next_permutation(a,a+n);
     cout<<ans<<endl;
     for(int i=0; i<n; i++)
-        printf("%lld%c",a[i],i<n-1?' ':'\n');
+        printf("%d%c",a[i],i<n-1?' ':'\n');
     return 0;
 }
 
