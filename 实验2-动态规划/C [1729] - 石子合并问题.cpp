@@ -1,25 +1,32 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-int n,a[111],b[111],dp[111][111],dpx[111][111],ans=0,ansx=0x3f3f3f3f;
- LL sum(int x,int l) {
-    if(x+l>n)
-        return b[n]-b[x-1]+b[(x+l)%n];
-    return b[x+l]-b[x-1];
+const int inf = 1e9;
+int n, m,max_dp[105][105], min_dp[105][105],sum[105];
+int get_sum(int i, int j){
+    if(i + j > n)
+        return get_sum(i, n - i) + get_sum(1, j - n + i - 1);
+    else return sum[i + j] - sum[i - 1];
 }
-int main() {
-    memset(dpx,0x3f3f3f3f,sizeof dpx);
-    cin>>n;
-    for(int i=0; i<n; i++) {
-        cin>>a[i];
-        b[i+1]=a[i]+b[i],dpx[i][1]=0;
+int main(){
+    scanf("%d", &n);
+    for(int i = 1; i <= n; ++i){
+        scanf("%d", &sum[i]);
+        sum[i] += sum[i - 1];
     }
-    for(int j=2; j<=n; j++)
-        for(int i=0; i<n; i++)
-            for(int k=1; k<j; k++)
-                dp[i][j]=max(dp[i][j],dp[i][k]+dp[(i+k)%n][j-k]+sum(i+1,j-1)),dpx[i][j]=min(dpx[i][j],dpx[i][k]+dpx[(i+k)%n][j-k]+sum(i+1,j-1));
-    for(int i=0; i<n; i++)
-        ans=max(ans,dp[i][n]),ansx=min(ansx,dpx[i][n]);
-    cout<<ansx<<endl<<ans<<endl;
+    for(int j = 1; j < n; ++j)
+        for(int i = 1; i <= n; ++i){
+            min_dp[i][j] = inf;
+            max_dp[i][j] = 0;
+            for(int k = 0; k < j; ++k){
+                max_dp[i][j] = max(max_dp[i][j], max_dp[i][k] + max_dp[(i + k) % n + 1][j - k - 1] + get_sum(i, j));
+                min_dp[i][j] = min(min_dp[i][j], min_dp[i][k] + min_dp[(i + k) % n + 1][j - k - 1] + get_sum(i, j));
+            }
+        }
+    int Max = 0, Min = inf;
+    for(int i = 1; i <= n; ++i){
+        Max = max(Max, max_dp[i][n - 1]);
+        Min = min(Min, min_dp[i][n - 1]);
+    }
+    printf("%d\n%d\n", Min, Max);
     return 0;
 }
