@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-typedef long long LL;
-LL n,m,a[11],b[11],dp[21234];
+int n,m,a[11],b[11],dp[21234];
 int main() {
     cin>>n;
     memset(dp,0x3f3f3f3f,sizeof dp);
