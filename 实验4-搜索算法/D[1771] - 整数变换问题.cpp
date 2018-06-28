@@ -39,14 +39,3 @@ int main() {
     }
     return 0;
 }
-
-Sample Input
-
-15 4
-
-Sample Output
-
-4
-gfgg
-
-

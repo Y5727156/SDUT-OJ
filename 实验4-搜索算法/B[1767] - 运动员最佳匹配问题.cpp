@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
+
 using namespace std;
-int p[25][25],q[25][25],n,c[25],ans;
-bool vis[25];
+int p[25][25],q[25][25],n,c[25],ans,vis[25];
 void dfs(int x,int tot)
 {
     if(x>n){
@@ -36,19 +36,3 @@ int main()
     cout<<ans;
     return 0;
 }
-
-
-Sample Input
-
-3
-10 2 3
-2 3 4
-3 4 5
-2 2 2
-3 5 3
-4 5 1
-
-Sample Output
-
-52
-
