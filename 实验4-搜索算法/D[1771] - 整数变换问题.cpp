@@ -1,56 +1,41 @@
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
-int k = 1;
-int c = 0;
-char a[100] = {'\0'};
-int SelectFun(const int n, const int m, int s) //选择函数
+struct node 
 {
-     if(s == 0){
-        return 3 * n;
-     }
-
-     else{
-        return n / 2;
-     }
-
-}
-bool DeptSearch(int Dept, const int n, const int m)//深搜
-{
-     int num;
-     if(Dept > k) return false;
-     num = n;
-     for(int i = 0; i < 2; i++)
-     {
-          num = SelectFun(n, m, i);
-          if(num  == m || DeptSearch(Dept + 1,num,m)){
-
-                if(i == 0){
-                    a[c] = 'f';
-                }
-                else{
-                    a[c] = 'g';
-                }
-                c ++;
-                return true;
-          }
-
-     }
-     return false;
-}
-
-int main()
-{
-    int m, n, Dept = 1;
-    cin >> m >> n;
-    k = 1;
-    while( !DeptSearch(1, m, n) )
-    {
-        k ++;
-    }
-    cout << k << endl;
-    int i = 0;
-    for(i = 0; i < c; i ++){
-        cout << a[i];
+int s, x, f, p;
+};
+int n, m;
+map<int, node> mmp;
+queue<node> q;
+int main() {
+    cin >> n >> m;
+    node a = {0, n, 0, -1};
+    mmp[n] = a;
+    q.push(a);
+    while (q.size()) {
+        node a = q.front();
+        q.pop();
+        if (a.x == m) {
+            cout << a.s << endl;
+            while (~a.p) {
+                cout << (a.f ? 'f' : 'g');
+                a = mmp[a.p];
+            }
+            cout << endl;
+            break;
+        }
+        node b = a;
+        b.s++, b.x = a.x * 3, b.f = 1, b.p = a.x;
+        if (!mmp.count(b.x)) {
+            mmp[b.x] = b;
+            q.push(b);
+        }
+        b = a;
+        b.s++, b.x = a.x / 2, b.f = 0, b.p = a.x;
+        if (!mmp.count(b.x)) {
+            mmp[b.x] = b;
+            q.push(b);
+        }
     }
     return 0;
 }

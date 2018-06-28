@@ -30,7 +30,8 @@ int main()
         for(int j=1;j<=n;j++)
             cin>>q[i][j];
     for(int i=1;i<=n;i++)
-        for(int j=1;j<=n;j++)c[i]=max(c[i],p[i][j]*q[j][i]);
+        for(int j=1;j<=n;j++)
+            c[i]=max(c[i],p[i][j]*q[j][i]);
     dfs(1,0);
     cout<<ans;
     return 0;
