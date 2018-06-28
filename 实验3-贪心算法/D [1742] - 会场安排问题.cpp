@@ -1,14 +1,17 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-typedef long long LL;
 struct node {
-    LL a, b;
-} p[11234];
-LL n;
-priority_queue<LL, vector<LL>, greater<LL> > q;
+    int a, b;
+} p[10005];
+int n;
+priority_queue<int, vector<int>, greater<int> > q;
+//第二个参数( vector )，是来承载底层数据结构堆的容器
+//第三个参数则是一个比较类，less 表示数字大的优先级高，而 greater 表示数字小的优先级高。
 
-inline bool cmp(node a, node b) {
+
+//自定义比较函数  -重载
+bool cmp(node a, node b) {
     return a.a < b.a;
 }
 
