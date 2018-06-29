@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 struct node{
-    int s, x, f, p;
+    int cnt, n, flag, p;
 };
 int n, m;
 map<int, node> mp;
@@ -14,25 +14,31 @@ int main() {
     while (q.size()) {
         a = q.front();
         q.pop();
-        if (a.x == m) {
-            cout << a.s << endl;
+        if (a.n == m) {
+            cout << a.cnt << endl;
             while (~a.p) {
-                cout << (a.f ? 'f' : 'g');
+                cout << (a.flag ? 'f' : 'g');
                 a = mp[a.p];
             }
             cout << endl;
             break;
         }
         node b = a;
-        b.s++, b.x = a.x * 3, b.f = 1, b.p = a.x;
-        if (!mp.count(b.x)) {
-            mp[b.x] = b;
+        b.cnt++;
+        b.n = a.n * 3;
+        b.flag = 1;
+        b.p = a.n;
+        if (!mp.count(b.n)) {
+            mp[b.n] = b;
             q.push(b);
         }
         b = a;
-        b.s++, b.x = a.x / 2, b.f = 0, b.p = a.x;
-        if (!mp.count(b.x)) {
-            mp[b.x] = b;
+        b.cnt++;
+        b.n = a.n / 2;
+        b.flag = 0;
+        b.p = a.n;
+        if (!mp.count(b.n)) {
+            mp[b.n] = b;
             q.push(b);
         }
     }

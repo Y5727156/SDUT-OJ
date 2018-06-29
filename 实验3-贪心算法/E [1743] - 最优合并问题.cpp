@@ -1,34 +1,32 @@
 #include <bits/stdc++.h>
 
 using namespace std;
-typedef long long LL;
-LL n, x, ans, ansx, t;
-priority_queue<LL, vector<LL> > q;
-priority_queue<LL, vector<LL>, greater<LL> > qx;
-
+priority_queue<int,vector<int> >q;
+priority_queue<int,vector<int>,greater<int> >qx;
+int k,ans,t,x,ansx;
 int main() {
-    cin >> n;
-    for (int i = 0; i < n; i++) {
-        cin >> x;
+    scanf("%d",&k);
+    while(k--){
+        scanf("%d",&x);
         q.push(x);
         qx.push(x);
     }
-    while (q.size() > 1) {
-        t = q.top();
+    while(q.size()>1){
+        t=q.top();
         q.pop();
-        t += q.top();
+        t+=q.top();
         q.pop();
-        ans += t - 1;
+        ans+=t-1;
         q.push(t);
     }
-    while (qx.size() > 1) {
-        t = qx.top();
+    while(qx.size()>1){
+        t=qx.top();
         qx.pop();
-        t += qx.top();
+        t+=qx.top();
         qx.pop();
-        ansx += t - 1;
+        ansx+=t-1;
         qx.push(t);
     }
-    cout << ans << " " << ansx << endl;
+    printf("%d %d\n",ans,ansx);
     return 0;
 }
